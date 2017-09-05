@@ -1,0 +1,21 @@
+{
+  "name": "vendingmachineapi",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "test": "jest --forceExit",
+    "start": "node server.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "bluebird": "^3.5.0",
+    "body-parser": "^1.17.2",
+    "express": "^4.15.4",
+    "jest": "^21.0.1",
+    "mongoose": "^4.10.8",
+    "morgan": "^1.8.2",
+    "supertest": "^3.0.0"
+  }
+}
