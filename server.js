@@ -2,6 +2,7 @@ const app = require("./app");
 const port = process.env.PORT || 8100
 const Item = require("./models/item");
 
+//new item for the db
 app.post("/api/vendor/items", function (req, res) {
     let newItem = new Item(req.body)
     newItem
@@ -15,6 +16,46 @@ app.post("/api/vendor/items", function (req, res) {
         })
 });
 
+//see list of items
+app.get("/api/customer/items", function (req, res) {
+    Item.find(function (foundItem) {
+        if (!foundItem) {
+            return res.send({ msg: "no Items found" })
+        }
+        return res.json({ item: foundItem })
+    })
+        .catch(function (err) {
+            return res.status(500).send(err);
+        })
+})
+
+//save a purchase
+app.post("/api/customer/items/:itemId/purchases", function (req, res) {
+    let newPurchase = new Purchase(req.body)
+    newPurchase
+        .save()
+        .then(function (savedPurchase) {
+            return res.json({ item: savedPurchase })
+        })
+        .catch(function (err) {
+            return res.status(500).send(err)
+        })
+})
+
+//gets a list of purchases with times
+app.get("/api/vendor/purchases", function (req, res) {
+    Item.find(function (foundPurchases) {
+        if (!foundPurchases) {
+            return res.send({ msg: "no purchases found" })
+        }
+        res.json({ item: foundPurchases })
+    })
+        .catch(function (err) {
+            return res.status(500).send(err)
+        })
+})
+
 app.listen(port, function () {
     console.log(`server is running on port ${port}!`);
 });
+
