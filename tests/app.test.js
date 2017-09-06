@@ -67,3 +67,32 @@ describe("GET /item", function () {
     })
 })
 
+//requests amount of money in machine
+describe("GET /item", function () {
+    test("should return successfully", function () {
+        return request(app)
+            .post("/api/vendor/money")
+            .send(item)
+            .expect(response.status).toBe(200)
+            .expect(response.body.data.quantity).toBe(5)
+            .expect(response.body.data.description).toBe("lays")
+            .expect(response.body.data.price).toBe(35)
+            .expect(function (res) {
+            });
+    })
+})
+
+//this updates an item
+describe("PUT /item", function () {
+    test("should return successfully", function () {
+        return request(app)
+            .post("/api/vendor/items/:itemId")
+            .send(item)
+            .expect(response.status).toBe(200)
+            .expect(response.body.data.quantity).toBe(5)
+            .expect(response.body.data.description).toBe("lays")
+            .expect(response.body.data.price).toBe(35)
+            .expect(function (res) {
+            });
+    })
+})

@@ -55,6 +55,32 @@ app.get("/api/vendor/purchases", function (req, res) {
         })
 })
 
+app.get("/api/vendor/money", function (req, res) {
+    Item.find(function (foundMoney) {
+        if (!foundMoney) {
+            return res.send({ msg: "no money in machine" })
+        }
+        res.json({ item: foundPurchases })
+    })
+        .catch(function (err) {
+            return res.status(500).send(err)
+        })
+})
+
+//updates item description, quantity and cost
+app.put("/api/vendor/items/:itemId", function (req, res) {
+    Item.findByIdAndUpdate(req.params.id, req.body)
+        .then(function (updatedItem) {
+            if (!updatedItem) {
+                return res.send({ msg: "could not update item" });
+            }
+            res.json({ item: updatedItem })
+        })
+        .catch(function (err) {
+            res.status(500).send(err);
+        });
+});
+
 app.listen(port, function () {
     console.log(`server is running on port ${port}!`);
 });
