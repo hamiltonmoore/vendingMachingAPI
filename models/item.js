@@ -3,14 +3,8 @@ const Schema = mongoose.Schema;
 
 const itemSchema = new Schema(
     {
-        data:
-        {
-            id: String,
-            description: String,
-            cost: Number,
-            quantity: Number
-        },
-
+        description: String,
+        cost: Number,
     });
 
 let item = mongoose.model("item", itemSchema);
